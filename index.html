@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The House of Jin</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #f37070; }
+    .container { padding: 1rem; max-width: 480px; margin: auto; }
+    .card { background: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1); overflow: hidden; margin-bottom: 1rem; cursor: pointer; }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card-content { padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+    button { padding: 0.5rem 1rem; border: none; background: #1e88e5; color: white; border-radius: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="root" class="container"></div>
+
+
+  <!-- React + ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+  <!-- Main App -->
+  <script type="text/babel">
+    const menuData = [
+      {
+        id: 1,
+        name: "Burger",
+        price: 550,
+        image: "Bk.jpg",
+        description: "อร่อย"
+      },
+      {
+        id: 2,
+        name: "spaghetti",
+        price: 790,
+        image: "spa.jpg",
+        description: "อร่อยเหมือนกินที่ไทย"
+      },
+      {
+        id: 3,
+        name: "ข้าวผัด",
+        price: 550,
+        image: "k.jpg",
+        description: "ธรรมดามาก"
+      },
+      {
+        id: 4,
+        name: "Pizza",
+        price: 990,
+        image: "Pz.jpg",
+        description: "อร่อยเหมือนข้างทาง"
+      },
+      {
+        id: 5,
+        name: "ต้มยำกุ้ง",
+        price: 800,
+        image: "Tkk.jpg",
+        description: "กินแล้วตาย"
+      },
+      {
+        id: 6,
+        name: "ชาไทย",
+        price: 150,
+        image: "Tt.webp",
+        description: "หวานตัดขา"
+      },
+      {
+        id: 7,
+        name: "น้ำแดง",
+        price: 150,
+        image:"photo.jpg",
+        description: "หาหมอทันที"
+      },
+      {
+        id: 8,
+        name: "ชาเขียว",
+        price: 250,
+        image: "MC.jpg",
+        description: "ขมมาก"
+      },
+      {
+        id: 9,
+        name: "ชานม",
+        price: 150,
+        image: "Mt.jpg",
+        description: "ไข่มุกติดคอตาย"
+      },
+      {
+        id: 10,
+        name: "น้าดื่ม",
+        price: 100,
+        image: "ww.jpg",
+        description: "ดีมาก"
+      }
+    ];
+    
+
+
+    function App() {
+      const [selectedFood, setSelectedFood] = React.useState(null);
+
+
+      if (selectedFood) {
+        return (
+          <div>
+            <img src={selectedFood.image} style={{width:'100%', borderRadius:'12px'}}/>
+            <h2>{selectedFood.name}</h2>
+            <p>{selectedFood.description}</p>
+            <p><strong>ราคา {selectedFood.price} บาท</strong></p>
+            <button onClick={() => setSelectedFood(null)}>ย้อนกลับ</button>
+          </div>
+        );
+      }
+
+
+      return (
+        <div>
+          {menuData.map(item => (
+            <div className="card" key={item.id} onClick={() => setSelectedFood(item)}>
+              <img src={item.image} />
+              <div className="card-content">
+                <span>{item.name}</span>
+                <span>{item.price} บาท</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
